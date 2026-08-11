@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things That Stayed</title>
+<meta name="description" content="A working collection of ideas, patterns and lines that stayed after years of reading, listening, watching and wandering through the internet.">
+<style>
+:root{
+  --bg:#f7f7f3; --ink:#11110f; --muted:#74736d; --line:#deded7;
+  --card:#ffffff; --accent:#ff5c35; --accent2:#171717; --soft:#ecece6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1160px;margin:auto;padding:0 28px}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);font-size:13px}
+.brand{font-weight:800;letter-spacing:-.03em}
+.navlinks{display:flex;gap:22px;color:var(--muted)}
+.navlinks a{text-decoration:none}
+.hero{padding:105px 0 95px;max-width:900px}
+.kicker{text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--accent);font-weight:800;margin-bottom:22px}
+h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(52px,8vw,100px);line-height:.93;letter-spacing:-.065em;margin:0 0 28px}
+.hero p{font-size:20px;line-height:1.55;max-width:700px;color:#45413a;margin:0}
+.hero .small{font-size:13px;color:var(--muted);margin-top:24px}
+.section{padding:75px 0;border-top:1px solid var(--line)}
+.sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;margin-bottom:36px}
+.sectionhead h2{font-family:Georgia,serif;font-weight:500;font-size:42px;letter-spacing:-.04em;margin:0}
+.sectionhead p{max-width:480px;color:var(--muted);font-size:14px;margin:0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.filter{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 13px;font-size:12px;cursor:pointer}
+.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);padding:27px;border-radius:5px;transition:.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(30,25,15,.06)}
+.num{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:.1em}
+.card h3{font-family:Georgia,serif;font-size:26px;line-height:1.12;font-weight:500;margin:10px 0 12px;letter-spacing:-.025em}
+.card p{font-size:14px;color:#4e4a43;margin:0 0 16px}
+details{border-top:1px solid var(--line);padding-top:13px}
+summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--accent)}
+.detail{padding-top:10px;color:#625d54;font-size:13px}
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.quote{background:var(--accent2);color:#f7f3e9;border-radius:5px;padding:28px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
+.quote blockquote{font-family:Georgia,serif;font-size:24px;line-height:1.18;margin:0;letter-spacing:-.02em}
+.quote .source{font-size:12px;color:#c8d0cb}
+.quote .why{font-size:13px;color:#e1e4df;margin-top:20px}
+.note{margin-top:28px;padding:18px 20px;background:#ebe6db;border-left:3px solid var(--accent);font-size:13px;color:#5e584e}
+.footer{padding:55px 0 80px;color:var(--muted);font-size:12px}
+.footer strong{color:var(--ink)}
+@media(max-width:800px){.grid,.quote-grid{grid-template-columns:1fr}.hero{padding:75px 0}.sectionhead{display:block}.sectionhead p{margin-top:15px}.navlinks{display:none}}
+
+.capture{margin-bottom:42px}
+.formgrid{display:grid;grid-template-columns:1fr 190px;gap:10px}
+.formgrid input,.formgrid select,.formgrid textarea{
+  width:100%;border:1px solid var(--line);background:#f7f4ed;padding:12px 13px;
+  font:inherit;font-size:13px;color:var(--ink);border-radius:3px;outline:none
+}
+.formgrid input:focus,.formgrid select:focus,.formgrid textarea:focus{border-color:var(--accent)}
+.formgrid textarea{grid-column:1/-1;min-height:105px;resize:vertical}
+.addbtn{grid-column:1/-1;width:max-content;border:0;background:var(--ink);color:white;padding:11px 16px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:700}
+.save-msg{font-size:12px;color:var(--accent);min-height:18px;margin-top:10px}
+.dbhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
+.dbhead h3{font-family:Georgia,serif;font-size:28px;font-weight:500;margin:6px 0 0}
+.clearbtn{border:1px solid var(--line);background:transparent;padding:9px 12px;font-size:11px;cursor:pointer;color:var(--muted)}
+.empty{border:1px dashed var(--line);padding:35px;text-align:center;color:var(--muted);font-size:13px}
+.entry-card{position:relative}
+.entry-type{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:800}
+.entry-date{font-size:11px;color:var(--muted);margin-top:15px}
+.delete-entry{position:absolute;right:20px;top:20px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:16px}
+@media(max-width:650px){
+  .formgrid{grid-template-columns:1fr}
+  .formgrid textarea,.addbtn{grid-column:1}
+  .dbhead{display:block}.clearbtn{margin-top:14px}
+}
+
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg)}
+.wrap{max-width:1240px}
+nav{height:72px;position:sticky;top:0;z-index:10;background:rgba(247,247,243,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{font-size:12px;letter-spacing:.08em}.brand span{color:var(--accent)}
+.navlinks{gap:28px;font-size:12px}.navlinks a{transition:.2s}.navlinks a:hover{color:var(--accent)}
+.navstatus{font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)}
+.navstatus i{display:inline-block;width:6px;height:6px;background:#48a868;border-radius:50%;margin-right:7px}
+.hero{min-height:calc(92vh - 72px);padding:80px 0 70px;display:flex;flex-direction:column;justify-content:center}
+.kicker,.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800}
+h1{font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:clamp(64px,11vw,156px);font-weight:650;line-height:.84;letter-spacing:-.085em;margin:18px 0 55px}
+h1 em{font-family:Georgia,serif;font-weight:400;letter-spacing:-.075em}
+.hero-bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end}
+.hero p{font-size:18px;line-height:1.6;max-width:680px}
+.hero-meta{justify-self:end;display:flex;align-items:center;gap:13px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.13em}
+.hero-meta b{color:var(--accent);font-size:16px}.hero .small{font-size:11px;color:var(--muted);margin-top:30px}
+.section{padding:105px 0;border-top:1px solid var(--line)}
+.sectionhead{margin-bottom:45px}.sectionhead h2{font-family:Inter,sans-serif;font-size:clamp(36px,5vw,65px);font-weight:600;letter-spacing:-.065em;margin:8px 0 0}
+.sectionhead p{font-size:14px;line-height:1.6}
+.grid{grid-template-columns:repeat(3,1fr);gap:12px}
+.card{padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:none;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(20,20,15,.07)}
+.card h3{font-family:Inter,sans-serif;font-size:23px;font-weight:560;line-height:1.12;letter-spacing:-.04em}
+.card p{line-height:1.65}
+.num{font-size:9px;letter-spacing:.16em}
+.filters{margin-bottom:22px}.filter{border:1px solid var(--line);background:transparent}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.quote-grid{grid-template-columns:repeat(3,1fr);gap:12px}
+.quote{background:#171717;border-radius:12px;min-height:300px;padding:30px}
+.quote blockquote{font-size:27px}.quote .source{color:#aaa}.quote .why{color:#ddd;line-height:1.6}
+.note{background:var(--soft);border-left-color:var(--accent);border-radius:0 8px 8px 0}
+.formgrid input,.formgrid select,.formgrid textarea{background:#f7f7f3;border-radius:8px}
+.addbtn{background:var(--accent);border-radius:8px}
+.dbhead h3{font-family:Inter,sans-serif;font-weight:600;letter-spacing:-.04em}
+.clearbtn{border-radius:7px}
+.empty{border-radius:12px;background:#fafaf7}
+.footer{border-top:1px solid var(--line)}
+@media(max-width:900px){
+ .grid,.quote-grid{grid-template-columns:repeat(2,1fr)}
+ .hero-bottom{grid-template-columns:1fr}.hero-meta{justify-self:start}
+}
+@media(max-width:650px){
+ .navstatus{display:none}.grid,.quote-grid{grid-template-columns:1fr}
+ .hero{min-height:auto;padding:80px 0}.hero h1{font-size:64px;margin-bottom:42px}
+}
+
+.garden-tools{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:28px}
+.garden-tools .filters{margin:0}.idea-search{width:240px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:10px 14px;font:inherit;font-size:12px;outline:none}
+.idea-search:focus{border-color:var(--accent)}
+@media(max-width:650px){.garden-tools{display:block}.idea-search{width:100%;margin-top:12px}.garden-tools .filters{overflow:auto;flex-wrap:nowrap}}
+
+.current-grid{grid-template-columns:repeat(2,1fr)}
+.current-card h3{max-width:520px}
+.thinking-strip{margin-top:12px;background:#171717;color:#f7f7f3;border-radius:12px;padding:35px 38px;display:grid;grid-template-columns:.8fr 1fr 1fr;gap:12px;align-items:end}
+.thinking-strip .num{color:#ff6a45}
+.thinking-strip p{margin:0;color:#bcbcb6;font-size:14px}
+.thinking-question{font-family:Georgia,serif;font-size:30px;line-height:1.05;letter-spacing:-.04em}
+.thinking-tags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.thinking-tags span{border:1px solid #444;padding:7px 11px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#d8d8d2}
+.loop{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:10px;letter-spacing:.15em}
+.loop b{color:var(--accent);font-size:15px}
+@media(max-width:900px){
+ .current-grid{grid-template-columns:1fr}
+ .thinking-strip{grid-template-columns:1fr}
+ .thinking-question{margin-top:8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="brand">THINGS THAT STAYED <span>↗</span></div>
+  <div class="navlinks"><a href="#ideas">Ideas</a><a href="#currently">Currently</a><a href="#uncertainty">Uncertainty</a><a href="#lines">Lines</a><a href="#database">Archive</a><a href="#method">About</a></div>
+  <div class="navstatus"><i></i> work in progress</div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Personal archive · 2026—</div>
+  <h1>What survived<br><em>the noise.</em></h1>
+  <div class="hero-bottom">
+    <p>
+      Years of reading, listening, watching, studying, wandering through Reddit and following
+      whatever seemed worth opening have left behind a strange collection of patterns.
+      I don't have a complete record of any of it. This is an attempt to capture what I can still use.
+    </p>
+    <div class="hero-meta">
+      <span>Ideas</span><b>→</b><span>Make</span><b>→</b><span>Keep learning</span>
+    </div>
+  </div>
+  <p class="small">Some are half-formed. Some may be wrong. The useful ones are the ideas I keep coming back to.</p>
+</header>
+
+<section class="section" id="ideas">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">01 / OBSERVATIONS</div>
+      <h2>Ideas I keep noticing</h2>
+    </div>
+    <p>Ideas that became more useful when they showed up in more than one place.</p>
+  </div>
+  <div class="garden-tools">
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="systems">Systems</button>
+    <button class="filter" data-filter="people">People</button>
+    <button class="filter" data-filter="technology">Technology</button>
+    <button class="filter" data-filter="history">History</button>
+  </div>
+  <input id="ideaSearch" class="idea-search" placeholder="Search the garden…" aria-label="Search ideas">
+</div>
+  <div class="grid" id="ideaGrid">
+    <article class="card" data-tags="systems history">
+      <div class="num">01 / SYSTEMS</div>
+      <h3>Technology rarely removes a bottleneck. It moves it.</h3>
+      <p>Cheap printing shifted scarcity toward distribution. Cheap internet shifted it toward attention. Cheap AI production may shift it toward verification, trust and selection.</p>
+      <details><summary>What I take from it</summary><div class="detail">When something becomes abundant, look for the thing that has become scarce because of that abundance.</div></details>
+    </article>
+    <article class="card" data-tags="people systems">
+      <div class="num">02 / PEOPLE</div>
+      <h3>Incentives can explain behaviour better than intentions.</h3>
+      <p>People can sincerely value one thing while repeatedly behaving according to another. The structure around a person often tells you what behaviour will survive.</p>
+      <details><summary>What I take from it</summary><div class="detail">When trying to understand a system, ask what it rewards—not just what it says it values.</div></details>
+    </article>
+    <article class="card" data-tags="history systems">
+      <div class="num">03 / HISTORY</div>
+      <h3>Geography creates constraints that politics cannot simply wish away.</h3>
+      <p>Trade routes, rivers, mountains, coastlines, climate and access to resources repeatedly shape what states can do over long periods.</p>
+      <details><summary>What I take from it</summary><div class="detail">Before analysing a political choice, understand the physical constraints around it.</div></details>
+    </article>
+    <article class="card" data-tags="systems">
+      <div class="num">04 / SYSTEMS</div>
+      <h3>Systems can produce outcomes nobody intended.</h3>
+      <p>Millions of individually sensible decisions can combine into congestion, bubbles, misinformation, fragility or other collective outcomes.</p>
+      <details><summary>What I take from it</summary><div class="detail">The intention behind an institution explains its origin; it does not necessarily explain its eventual behaviour.</div></details>
+    </article>
+    <article class="card" data-tags="technology people">
+      <div class="num">05 / TECHNOLOGY</div>
+      <h3>When information becomes abundant, judgement becomes scarce.</h3>
+      <p>The problem used to be finding something worth reading. Increasingly, the harder problem is deciding which of the thousands of things available deserve attention.</p>
+      <details><summary>What I take from it</summary><div class="detail">Curation isn't about collecting more. It's about reducing the search space without losing the important signal.</div></details>
+    </article>
+    <article class="card" data-tags="people">
+      <div class="num">06 / PEOPLE</div>
+      <h3>People don't encounter information in a vacuum.</h3>
+      <p>Identity, status, fear, memory, belonging and prior beliefs affect how the same piece of information gets interpreted by different people.</p>
+      <details><summary>What I take from it</summary><div class="detail">Understanding a claim often requires understanding the person and context through which the claim is being received.</div></details>
+    </article>
+    <article class="card" data-tags="systems technology">
+      <div class="num">07 / SYSTEMS</div>
+      <h3>What gets measured starts getting optimised.</h3>
+      <p>A metric begins as a proxy for a goal. Once rewards are attached to it, the proxy can quietly become the goal itself.</p>
+      <details><summary>What I take from it</summary><div class="detail">Whenever a metric becomes a target, ask what important thing it might stop representing.</div></details>
+    </article>
+    <article class="card" data-tags="history systems">
+      <div class="num">08 / HISTORY</div>
+      <h3>Logistics often decides what grand strategy can actually accomplish.</h3>
+      <p>Empires and armies require food, transport, money, supply chains, infrastructure and disease control. Ideas operate inside physical constraints.</p>
+      <details><summary>What I take from it</summary><div class="detail">When an outcome looks surprising, inspect the boring infrastructure underneath it.</div></details>
+    </article>
+    <article class="card" data-tags="people systems">
+      <div class="num">09 / PEOPLE</div>
+      <h3>Reputation is accumulated information.</h3>
+      <p>A strong reputation reduces the amount of verification required before people cooperate, transact or trust.</p>
+      <details><summary>What I take from it</summary><div class="detail">Trust is not merely an emotion; it can reduce transaction costs.</div></details>
+    </article>
+    <article class="card" data-tags="technology systems">
+      <div class="num">10 / TECHNOLOGY</div>
+      <h3>Scale changes the problem, not just the quantity.</h3>
+      <p>A process that works for ten people may fail at ten thousand because communication, coordination, incentives and failure modes change.</p>
+      <details><summary>What I take from it</summary><div class="detail">Scaling isn't always “more of the same.” Sometimes it creates a new class of problem.</div></details>
+    </article>
+    <article class="card" data-tags="people">
+      <div class="num">11 / PEOPLE</div>
+      <h3>People can be sincere and still be wrong.</h3>
+      <p>Confidence and sincerity tell us something about conviction. Neither establishes whether the underlying belief is correct.</p>
+      <details><summary>What I take from it</summary><div class="detail">Intellectual humility is less about doubting everything and more about keeping beliefs updateable.</div></details>
+    </article>
+    <article class="card" data-tags="systems technology">
+      <div class="num">12 / SYSTEMS</div>
+      <h3>The intermediary becomes valuable when complexity rises.</h3>
+      <p>When there are too many products, sources, opinions or choices, someone who can reduce search cost and add context becomes useful.</p>
+      <details><summary>What I take from it</summary><div class="detail">The value of a filter increases with the amount of noise surrounding the decision.</div></details>
+    </article>
+  </div>
+</section>
+
+
+<section class="section" id="currently">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">02 / CURRENTLY</div>
+      <h2>What I'm doing with it.</h2>
+    </div>
+    <p>A few things I'm actually spending time on right now — building with AI, making content, testing ideas and turning some of them into small working things.</p>
+  </div>
+
+  <div class="grid current-grid">
+    <article class="card current-card">
+      <div class="num">AI × CREATION</div>
+      <h3>Building with AI, not just talking about it.</h3>
+      <p>I'm using AI across video, images, websites, research, writing and small products. The interesting part for me isn't collecting tools; it's figuring out which parts of making something can genuinely become faster, better or possible at all.</p>
+      <details><summary>Why I'm doing it →</summary><div class="detail">The test is simple: does it help me make something I couldn't have made, or make something meaningfully better or faster?</div></details>
+    </article>
+
+    <article class="card current-card">
+      <div class="num">IDEAS → THINGS</div>
+      <h3>Turning ideas into small working products.</h3>
+      <p>I keep getting ideas for websites, tools and small internet products. I'm trying to move more of them from notes to something clickable, even if the first version is rough.</p>
+      <details><summary>Why I'm doing it →</summary><div class="detail">A working prototype exposes problems that an idea can hide.</div></details>
+    </article>
+
+    <article class="card current-card">
+      <div class="num">CONTENT & STORYTELLING</div>
+      <h3>Learning how to make things people want to watch.</h3>
+      <p>I'm playing with AI filmmaking, visual storytelling, short-form content, photography and editing — mostly trying to understand why some information feels worth watching while other information feels like homework.</p>
+      <details><summary>Why I'm doing it →</summary><div class="detail">Knowing something and making someone care about it are different skills.</div></details>
+    </article>
+
+    <article class="card current-card">
+      <div class="num">LEARNING IN PUBLIC</div>
+      <h3>Trying to document what I'm figuring out.</h3>
+      <p>I'm trying to document some of the things I'm figuring out instead of waiting until they look finished.</p>
+      <details><summary>Why I'm doing it →</summary><div class="detail">If I can't explain it clearly, I have a useful signal that my own understanding is incomplete.</div></details>
+    </article>
+  </div>
+
+  <div class="thinking-strip">
+    <div class="num">CURRENTLY THINKING ABOUT</div>
+    <p>If making content becomes almost free, what becomes scarce?</p>
+    <div class="thinking-question">What becomes valuable then?</div>
+    <div class="thinking-tags"><span>Taste</span><span>Curation</span><span>Trust</span><span>Distribution</span><span>Context</span></div>
+  </div>
+
+  <div class="loop">
+    <span>CONSUME</span><b>→</b><span>FILTER</span><b>→</b><span>CONNECT</span><b>→</b><span>QUESTION</span><b>→</b><span>BUILD</span><b>→</b><span>REVISIT</span>
+  </div>
+</section>
+
+
+
+<section class="section" id="uncertainty">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">05 / UNCERTAINTY</div>
+      <h2>What trading taught me.</h2>
+    </div>
+    <p>Not a trading strategy or signals. These are the ideas I find useful outside a chart too — in work, business and ordinary decisions.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="num">01 / ASYMMETRY</div>
+      <h3>Before upside, understand the downside.</h3>
+      <p>It is easy to get attracted to what something could return. The harder question is what happens if the assumption is wrong.</p>
+      <details><summary>What I take from it →</summary><div class="detail">I find myself asking this before committing too much money, time or attention to something. The upside matters, but so does the cost of being wrong.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">02 / PROCESS</div>
+      <h3>A good decision can still lose.</h3>
+      <p>Sometimes you can make a sensible decision with the information available and still get a bad outcome. That's uncomfortable, but it is different from making a bad decision.</p>
+      <details><summary>What I take from it →</summary><div class="detail">I try to judge the thinking separately from the result. Otherwise a lucky outcome can teach me the wrong lesson, and an unlucky one can make me abandon a good process.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">03 / PROBABILITY</div>
+      <h3>Uncertainty doesn't mean doing nothing.</h3>
+      <p>You rarely know what happens next with certainty. You can still make a decision based on what seems more likely, while knowing what would make you reconsider it.</p>
+      <details><summary>What I take from it →</summary><div class="detail">This is useful to me outside markets because waiting for certainty can become an excuse for never acting.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">04 / FEEDBACK</div>
+      <h3>Failure is useful only if you learn the right thing from it.</h3>
+      <p>A loss can mean the idea was wrong. It can also mean the timing was wrong, the conditions changed, or the outcome was simply unlucky.</p>
+      <details><summary>What I take from it →</summary><div class="detail">Before changing everything after a failure, I want to know what actually failed. Otherwise I may be correcting something that wasn't broken.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">05 / SAMPLE SIZE</div>
+      <h3>A streak is evidence, not proof.</h3>
+      <p>A few wins can make almost any process look convincing. A few losses can do the opposite.</p>
+      <details><summary>What I take from it →</summary><div class="detail">I try to be careful about turning a short run of success into a story about skill. The same applies to businesses, habits and people.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">06 / SURVIVAL</div>
+      <h3>Don't make one mistake fatal.</h3>
+      <p>Being right matters less if being wrong once can remove your ability to make the next decision.</p>
+      <details><summary>What I take from it →</summary><div class="detail">In business and life, I like decisions that leave room for another attempt. Staying in the game is an advantage in itself.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">07 / RISK</div>
+      <h3>Knowing the boundary can make action easier.</h3>
+      <p>It sounds counterintuitive, but defining what you are willing to lose can reduce the fear around taking a reasonable risk.</p>
+      <details><summary>What I take from it →</summary><div class="detail">I don't need to know everything before starting. I need to know whether I can live with being wrong.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">08 / REALITY</div>
+      <h3>Conviction is not evidence.</h3>
+      <p>You can understand something deeply, explain it confidently and still have the world disagree with you.</p>
+      <details><summary>What I take from it →</summary><div class="detail">Strong belief can help you commit, but it shouldn't be confused with proof. Reality gets the final vote.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">09 / LUCK</div>
+      <h3>Being right doesn't prove your reasoning was right.</h3>
+      <p>An outcome can validate a conclusion by accident. That makes success surprisingly dangerous: it can reinforce a bad explanation.</p>
+      <details><summary>What I take from it →</summary><div class="detail">When something works, I want to separate “it worked” from “I know why it worked.” Those aren't always the same thing.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">10 / OPTIONALITY</div>
+      <h3>Not acting is sometimes the better decision.</h3>
+      <p>There are situations where the best move is to keep your options open rather than force a decision just because you can.</p>
+      <details><summary>What I take from it →</summary><div class="detail">I've become more comfortable with passing on things when the conditions aren't good enough. Opportunity cost works both ways.</div></details>
+    </article>
+
+    <article class="card">
+      <div class="num">11 / LONG RUN</div>
+      <h3>You don't have to win every round.</h3>
+      <p>A probabilistic approach can tolerate being wrong repeatedly. What matters is whether the overall process survives and compounds over enough attempts.</p>
+      <details><summary>What I take from it →</summary><div class="detail">This changes the question from “How do I make sure I'm right?” to “How do I build a process that can keep working even when I'm wrong sometimes?”</div></details>
+    </article>
+
+    <article class="card current-card">
+      <div class="num">12 / THE ONE I KEEP</div>
+      <h3>I'm less interested in being right than being able to survive being wrong.</h3>
+      <p>This is probably the idea from trading that travels furthest for me — into money, business, careers, relationships and even ideas.</p>
+      <details><summary>Why it stayed →</summary><div class="detail">You don't need to predict everything correctly. You need enough room to learn when you don't.</div></details>
+    </article>
+  </div>
+</section>
+
+
+
+<section class="section" id="lines">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">04 / FRAGMENTS</div>
+      <h2>Lines that made me stop</h2>
+    </div>
+    <p>Not a collection of favourite quotes. Just words that made me stop, rethink something or remember an idea.</p>
+  </div>
+
+  <div class="quote-grid">
+    <article class="quote">
+      <blockquote>“If you look at a thing with desire, you never look at the thing as it is.”</blockquote>
+      <div>
+        <div class="source">Osho</div>
+        <div class="why">What stayed with me is the mechanism: desire can quietly turn observation into projection. I find that useful when thinking about people, ambition, money and even decisions I badly want to be right about.</div>
+      </div>
+    </article>
+
+    <article class="quote">
+      <blockquote>“The business of human wellbeing is the only real business. All other businesses are subsidiaries of that.”</blockquote>
+      <div>
+        <div class="source">Sadhguru · The Fundamental Business of Human Wellbeing</div>
+        <div class="why">I don't read this as saying business should become charity. I read it as a test of what a business ultimately creates for the people it serves — and whether profit is the result of creating value or the only thing being optimised.</div>
+      </div>
+    </article>
+
+    <article class="quote">
+      <blockquote>“In an age of nearly infinite leverage, judgment is the most important skill.”</blockquote>
+      <div>
+        <div class="source">Naval Ravikant · Judgment Is the Decisive Skill</div>
+        <div class="why">Leverage makes a decision travel further. That means better tools don't remove the need for judgment; they increase the cost of having poor judgment.</div>
+      </div>
+    </article>
+
+    <article class="quote">
+      <blockquote>“You took the standards as being Real. The norms. The beliefs. The societal notions. The expert talk. The intellectual jargon. All that is in the culture, you took to be Real.”</blockquote>
+      <div>
+        <div class="source">Kapil Gupta, M.D. · Questions From Long Time Private Clients</div>
+        <div class="why">The useful question for me isn't whether society is always wrong. It's whether I've mistaken familiarity for truth simply because an idea is repeated often enough and delivered with enough authority.</div>
+      </div>
+    </article>
+
+    <article class="quote">
+      <blockquote>“The first principle is that you must not fool yourself.”</blockquote>
+      <div>
+        <div class="source">Richard Feynman · Cargo Cult Science</div>
+        <div class="why">The part I find useful is that the person most capable of fooling me is me. Confidence in an explanation isn't evidence that the explanation is true.</div>
+      </div>
+    </article>
+
+    <article class="quote">
+      <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
+      <div>
+        <div class="source">Viktor Frankl · Man's Search for Meaning</div>
+        <div class="why">What interests me is the relationship between meaning and endurance — not the sentence as a motivational slogan.</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="note"><strong>Editorial rule:</strong> a line earns its place only when there is an idea behind it that I can actually unpack. Quotes are checked against reliable sources; uncertain wording is treated as a paraphrase.</div>
+</section>
+
+<section class="section" id="method">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">07 / ABOUT</div>
+      <h2>Why this exists</h2>
+    </div>
+    <p>The list is incomplete on purpose.</p>
+  </div>
+  <div class="card" style="max-width:820px">
+    <h3>I'm not trying to prove that I've read a lot.</h3>
+    <p>
+      I've read quite a few books, watched a ridiculous number of films and shows, listened to podcasts,
+      gone through articles, spent too much time in Reddit rabbit holes and followed whatever looked
+      interesting enough to open.
+    </p>
+    <p>
+      I don't have a clean list of all of it. I don't remember every book I've finished, and I definitely
+      don't remember every useful thing from the books I do remember. There are probably dozens of things
+      that influenced how I think without me being able to trace them back to the source.
+    </p>
+    <p>
+      So I don't want this to become a bibliography dressed up as a personality.
+    </p>
+    <p>
+      What interests me is the residue: <strong>what stayed, what changed how I look at something, and what
+      I still find myself using.</strong>
+    </p>
+    <p>
+      Some of these notes will be incomplete. Some will probably be interpretations rather than the author's
+      original point. And some will change as I learn more.
+    </p>
+    <p>
+      That's fine. I'd rather have an honest, growing record of what I actually remember and use than pretend
+      I have a perfectly reconstructed history of everything I've consumed.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="database">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">06 / GARDEN</div>
+      <h2>The database keeps growing</h2>
+    </div>
+    <p>I don't want to reconstruct the past forever. From here on, I'll add things when they genuinely make me stop.</p>
+  </div>
+
+  <div class="capture">
+    <div class="card" style="max-width:820px">
+      <div class="num">NEW ENTRY / PERSONAL INBOX</div>
+      <h3>Something worth keeping?</h3>
+      <p style="margin-bottom:20px">
+        Add an idea, quote, observation, article, scene, podcast thought or anything else that made you stop.
+        It stays in this browser, so I can keep adding to it over time.
+      </p>
+      <div class="formgrid">
+        <input id="entryTitle" placeholder="What is it?" aria-label="Entry title">
+        <select id="entryType" aria-label="Entry type">
+          <option>Idea</option>
+          <option>Quote</option>
+          <option>Observation</option>
+          <option>Book</option>
+          <option>Article</option>
+          <option>Podcast</option>
+          <option>Film / Series</option>
+          <option>Other</option>
+        </select>
+        <textarea id="entryText" placeholder="Write the thought in your own words. Source optional." aria-label="Entry text"></textarea>
+        <button class="addbtn" id="addEntry">Keep this</button>
+      </div>
+      <div id="saveMsg" class="save-msg"></div>
+    </div>
+  </div>
+
+  <div class="dbhead">
+    <div>
+      <div class="num">MY GROWING DATABASE</div>
+      <h3 id="entryCount">0 things saved</h3>
+    </div>
+    <button class="clearbtn" id="clearEntries">Clear my saved entries</button>
+  </div>
+  <div id="entryGrid" class="grid"></div>
+  <div id="emptyState" class="empty">
+    Nothing here yet. That's fine. The next good idea can start it.
+  </div>
+</section>
+
+<footer class="footer">
+  <p><strong>THINGS THAT STAYED.</strong> — unfinished by design.</p>
+  <p>The database is deliberately unfinished. New things can be added as they happen.</p>
+</footer>
+</div>
+<script>
+const buttons=[...document.querySelectorAll('.filter')];
+const cards=[...document.querySelectorAll('.card[data-tags]')];
+let activeFilter = "all";
+const ideaSearch = document.getElementById("ideaSearch");
+function filterIdeas(){
+  const q=(ideaSearch?.value||"").toLowerCase().trim();
+  cards.forEach(c=>{
+    const matchesFilter=activeFilter==="all"||c.dataset.tags.split(" ").includes(activeFilter);
+    const matchesSearch=!q||c.innerText.toLowerCase().includes(q);
+    c.style.display=(matchesFilter&&matchesSearch)?"block":"none";
+  });
+}
+buttons.forEach(btn=>btn.addEventListener('click',()=>{
+  buttons.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+  activeFilter=btn.dataset.filter; filterIdeas();
+}));
+ideaSearch?.addEventListener("input",filterIdeas);
+
+const STORAGE_KEY = "things-that-stayed-entries-v1";
+const entryTitle = document.getElementById("entryTitle");
+const entryType = document.getElementById("entryType");
+const entryText = document.getElementById("entryText");
+const addEntry = document.getElementById("addEntry");
+const entryGrid = document.getElementById("entryGrid");
+const emptyState = document.getElementById("emptyState");
+const entryCount = document.getElementById("entryCount");
+const saveMsg = document.getElementById("saveMsg");
+const clearEntries = document.getElementById("clearEntries");
+
+function getEntries(){
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+  catch(e){ return []; }
+}
+function saveEntries(entries){ localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); }
+
+function renderEntries(){
+  const entries = getEntries();
+  entryCount.textContent = `${entries.length} ${entries.length === 1 ? "thing" : "things"} saved`;
+  emptyState.style.display = entries.length ? "none" : "block";
+  entryGrid.innerHTML = entries.map((e,i)=>`
+    <article class="card entry-card">
+      <button class="delete-entry" title="Delete" onclick="removeEntry(${i})">×</button>
+      <div class="entry-type">${escapeHtml(e.type)}</div>
+      <h3>${escapeHtml(e.title || "Untitled")}</h3>
+      <p>${escapeHtml(e.text).replace(/\n/g,"<br>")}</p>
+      <div class="entry-date">${escapeHtml(e.date)}</div>
+    </article>`).join("");
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+function removeEntry(i){
+  const entries=getEntries(); entries.splice(i,1); saveEntries(entries); renderEntries();
+}
+window.removeEntry=removeEntry;
+
+addEntry.addEventListener("click",()=>{
+  const title=entryTitle.value.trim(), text=entryText.value.trim();
+  if(!text){ saveMsg.textContent="Write a thought first."; return; }
+  const entries=getEntries();
+  entries.unshift({
+    title:title || "Untitled thought",
+    type:entryType.value,
+    text,
+    date:new Date().toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})
+  });
+  saveEntries(entries);
+  entryTitle.value=""; entryText.value="";
+  saveMsg.textContent="Saved. Add another when something is actually worth keeping.";
+  renderEntries();
+  setTimeout(()=>saveMsg.textContent="",2500);
+});
+clearEntries.addEventListener("click",()=>{
+  if(confirm("Clear all saved entries from this browser?")){
+    localStorage.removeItem(STORAGE_KEY); renderEntries();
+  }
+});
+renderEntries();
+</script>
+</body>
+</html>
